@@ -15,5 +15,5 @@ blocks:
           commands:
             - checkout
             - sem-version ruby $RUBY_VERSION
-            - gem install oj
-            - rspec
+            - bundle install
+            - bundle exec rspec
