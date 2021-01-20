@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = 'SimpleRepresenter'
+  s.name = 'simple_representer'
   s.version = '0.0.1'
   s.date = '2021-01-20'
   s.summary = ''
