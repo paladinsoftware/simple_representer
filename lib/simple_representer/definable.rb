@@ -21,6 +21,11 @@ module SimpleRepresenter
       def definitions
         @definitions ||= []
       end
+
+      def inherited(subclass)
+        super
+        subclass.instance_variable_set('@definitions', instance_variable_get('@definitions'))
+      end
     end
   end
 end
