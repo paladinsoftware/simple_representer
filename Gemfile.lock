@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    SimpleRepresenter (0.0.1)
+    simple_representer (0.0.1)
       oj (~> 3.10.16)
 
 GEM
@@ -27,8 +27,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  SimpleRepresenter!
   rspec (~> 3.10.0)
+  simple_representer!
 
 BUNDLED WITH
    2.2.3

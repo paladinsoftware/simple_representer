@@ -7,6 +7,10 @@ RSpec.describe SimpleRepresenter::Representer do
     property :name
   end
 
+  class ChildRepresenter < CompanyRepresenter
+    property :id
+  end
+
   class Representer < SimpleRepresenter::Representer
     property :id
     property :name, if: -> { represented.id > 5 }
@@ -111,5 +115,27 @@ RSpec.describe SimpleRepresenter::Representer do
         expect(subject).to eq('[{"id":3,"full_name":"Jon","uid":"3Jon","something":4,"company":{"name":"SuperCompany"}},{"id":10,"name":"Bob","full_name":"Bob","uid":"10Bob","something":4,"company":{"name":"SecondCompany"}}]')
       end
     end
+  end
+
+  context 'representers inheritance' do
+    let(:represented_obj) { OpenStruct.new(id: 10, name: 'Company') }
+    let(:instance) { ChildRepresenter.new(represented_obj) }
+
+    describe '#to_h' do
+      subject { instance.to_h }
+
+      it do
+        expect(subject).to eq({ id: 10, name: 'Company' })
+      end
+    end
+
+    describe '#to_json' do
+      subject { instance.to_json }
+
+      it do
+        expect(subject).to eq('{"name":"Company","id":10}')
+      end
+    end
+
   end
 end
