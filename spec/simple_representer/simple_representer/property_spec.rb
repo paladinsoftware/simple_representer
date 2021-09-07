@@ -52,10 +52,19 @@ RSpec.describe SimpleRepresenter::Property do
   end
 
   context 'with default value option' do
-    let(:representer) { double({ represented: OpenStruct.new(name: nil) }) }
-    let(:options) { { default: 'default' } }
+    let(:options) { { default: 'default_name' } }
 
-    it { is_expected.to eq([:name, 'default']) }
+    context 'represented with nil value' do
+      let(:representer) { double({ represented: OpenStruct.new(name: nil) }) }
+
+      it { is_expected.to eq([:name, 'default_name']) }
+    end
+
+    context 'represented with falsy value' do
+      let(:representer) { double({ represented: OpenStruct.new(name: '') }) }
+
+      it { is_expected.to eq([:name, '']) }
+    end
   end
 
   context 'with render_nil option' do
