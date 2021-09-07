@@ -50,4 +50,30 @@ RSpec.describe SimpleRepresenter::Property do
 
     it { is_expected.to eq([:name, [{ inside_name: 'alfa' }, { inside_name: 'beta' }]]) }
   end
+
+  context 'with default value option' do
+    let(:representer) { double({ represented: OpenStruct.new(name: nil) }) }
+    let(:options) { { default: 'default' } }
+
+    it { is_expected.to eq([:name, 'default']) }
+  end
+
+  context 'with render_nil option' do
+    let(:representer) { double({ represented: OpenStruct.new(name: nil) }) }
+
+    context 'should not render nil field by default' do
+      let(:options) { {} }
+      it { is_expected.to eq(nil) }
+    end
+
+    context 'should not render nil field if render_nil is false' do
+      let(:options) { { render_nil: false } }
+      it { is_expected.to eq(nil) }
+    end
+
+    context 'should render nil field if render_nil is true' do
+      let(:options) { { render_nil: true } }
+      it { is_expected.to eq([:name, nil]) }
+    end
+  end
 end
