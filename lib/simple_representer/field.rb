@@ -12,12 +12,10 @@ module SimpleRepresenter
     def call(representer)
       return if options[:if] && !representer.instance_exec(&options[:if])
 
-      value = process(representer)
-      return if value.nil?
+      value = process(representer) || options[:default]
+      value = nested_representer(value) if options[:representer] && !value.nil?
 
-      value = nested_representer(value) if options[:representer]
-
-      [(options[:as] || field).to_sym, value]
+      build_field(value)
     end
 
     private
@@ -26,6 +24,12 @@ module SimpleRepresenter
       return options[:representer].for_collection(value).to_h if value.is_a?(Array)
 
       options[:representer].new(value).to_h
+    end
+
+    def build_field(value)
+      return if value.nil? && !options.fetch(:render_nil, false)
+
+      [(options[:as] || field).to_sym, value]
     end
   end
 end
