@@ -4,11 +4,13 @@ require_relative '../../../lib/simple_representer/representer'
 
 RSpec.describe SimpleRepresenter::Representer do
   class CompanyRepresenter < SimpleRepresenter::Representer
+    defaults render_nil: true
     property :name
   end
 
   class ChildRepresenter < CompanyRepresenter
     property :id
+    property :key
   end
 
   class Representer < SimpleRepresenter::Representer
@@ -28,7 +30,7 @@ RSpec.describe SimpleRepresenter::Representer do
     end
   end
 
-  let(:represented_obj) { OpenStruct.new(id: 3, name: 'Jon', company: OpenStruct.new(name: 'SuperCompany')) }
+  let(:represented_obj) { OpenStruct.new(id: 3, name: 'Jon', company: OpenStruct.new(id: 10, name: 'SuperCompany')) }
   let(:user) { OpenStruct.new(id: 4) }
   let(:instance) { Representer.new(represented_obj, user: user) }
 
@@ -125,7 +127,7 @@ RSpec.describe SimpleRepresenter::Representer do
       subject { instance.to_h }
 
       it do
-        expect(subject).to eq({ id: 10, name: 'Company' })
+        expect(subject).to eq({ id: 10, name: 'Company', key: nil })
       end
     end
 
@@ -133,9 +135,8 @@ RSpec.describe SimpleRepresenter::Representer do
       subject { instance.to_json }
 
       it do
-        expect(subject).to eq('{"name":"Company","id":10}')
+        expect(subject).to eq('{"name":"Company","id":10,"key":null}')
       end
     end
-
   end
 end
