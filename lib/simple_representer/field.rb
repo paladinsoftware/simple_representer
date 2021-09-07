@@ -12,7 +12,8 @@ module SimpleRepresenter
     def call(representer)
       return if options[:if] && !representer.instance_exec(&options[:if])
 
-      value = process(representer) || options[:default]
+      value = process(representer)
+      value = options[:default] if value.nil?
       value = nested_representer(value) if options[:representer] && !value.nil?
 
       build_field(value)
