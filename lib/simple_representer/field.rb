@@ -22,7 +22,8 @@ module SimpleRepresenter
     private
 
     def nested_representer(value)
-      return options[:representer].for_collection(value).to_h if value.is_a?(Array)
+      # TODO: just testing
+      return options[:representer].for_collection(value).to_h if value.to_a.is_a?(Array)
 
       options[:representer].new(value).to_h
     end
