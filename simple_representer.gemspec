@@ -8,9 +8,10 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
   s.homepage = 'https://github.com/paladinsoftware/simple_representer'
 
-  s.files = `git ls-files`.split($/)
-  s.test_files = gem.files.grep(%r{^(test|spec|features)/})
-  s.require_paths = %w(lib)
+  s.files = Dir.chdir(File.expand_path(__dir__)) do
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{\A(?:test|spec|features)/}) }
+  end
+  s.require_paths = ['lib']
 
   s.add_runtime_dependency 'oj', '~> 3.10.16'
 
