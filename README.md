@@ -2,6 +2,18 @@
 # SimpleRepresenter
 Simple solution to represent your objects as hash or json.
 
+Add this line to your application's Gemfile:
+
+## Instalation
+
+```ruby
+gem 'simple_representer'
+```
+
+And then execute:
+
+    $ bundle install
+
 ## Usage
 Create a class that inherits from `SimpleRepresenter::Representer`
 and define your representation using `property` (to access methods defined in represented object)
