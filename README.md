@@ -1,4 +1,3 @@
-[![Build Status](https://paladin-software.semaphoreci.com/badges/simple_representer/branches/master.svg?style=shields&key=88648f3f-f100-4e0f-9fca-48ea65537ec3)](https://paladin-software.semaphoreci.com/projects/simple_representer)
 # SimpleRepresenter
 Simple solution to represent your objects as hash or json.
 
