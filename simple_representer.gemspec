@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   end
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'oj', '~> 3.10.16'
+  s.add_runtime_dependency 'oj', '>= 3.10.16'
 
   s.add_development_dependency 'rspec', '~> 3.10.0'
 end
