@@ -26,7 +26,7 @@ module SimpleRepresenter
     alias to_hash to_h
 
     def to_json(*_args)
-      ::Oj.generate(to_h)
+      ::Oj.dump(to_h, { mode: :compat })
     end
 
     def self.for_collection(collection, **options)
