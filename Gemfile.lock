@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple_representer (1.0.1)
+    simple_representer (1.0.2)
       oj (>= 3.10.16)
 
 GEM
