@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../../../lib/simple_representer/representer'
 require_relative '../../../lib/simple_representer/property'
 
 RSpec.describe SimpleRepresenter::Property do
@@ -82,6 +83,27 @@ RSpec.describe SimpleRepresenter::Property do
 
     context 'should render nil field if render_nil is true' do
       let(:options) { { render_nil: true } }
+      it { is_expected.to eq([:name, nil]) }
+    end
+  end
+
+  context 'with render_if_key_found option' do
+    let(:representer) { double({ represented: OpenStruct.new(name: 'Paladin') }) }
+
+    context 'should render field if key is found by default' do
+      let(:options) { {} }
+      it { is_expected.to eq([:name, 'Paladin']) }
+    end
+
+    context 'should not render field if render_if_key_found is true' do
+      let(:representer) { double({ represented: OpenStruct.new(inside_name: 'Paladin') }) }
+      let(:options) { { render_if_key_found: true, render_nil: true } }
+      it { is_expected.to eq(nil) }
+    end
+
+    context 'should render field if render_if_key_found is false' do
+      let(:representer) { double({ represented: OpenStruct.new(inside_name: 'Paladin') }) }
+      let(:options) { { render_if_key_found: false, render_nil: true } }
       it { is_expected.to eq([:name, nil]) }
     end
   end

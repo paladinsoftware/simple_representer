@@ -66,6 +66,9 @@ property :name, default: 'Paladin'
 - `render_nil` to render or skip nil value (default is false):
 ```ruby
 # will render { name: nil } if name is nil
+```
+- `render_if_key_found` to render or skip if key not found (default is false):
+```ruby
 property :name, render_nil: true
 ```
 - `representer` to use different representer for nested objects.

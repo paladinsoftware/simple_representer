@@ -5,6 +5,7 @@ require_relative '../../../lib/simple_representer/representer'
 RSpec.describe SimpleRepresenter::Representer do
   class CompanyRepresenter < SimpleRepresenter::Representer
     defaults render_nil: true
+    defaults render_if_key_found: false
     property :name
   end
 
